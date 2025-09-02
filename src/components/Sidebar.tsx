@@ -8,42 +8,51 @@ import {
   Text,
   Group,
 } from "@mantine/core";
-interface SidebarComponentProps  {
-  userName: string;
-  type?: "admin" |"student";
+
+interface SidebarComponentProps {
+  userName?: string;
+  type?: "admin" | "student";
+  userAvatarUrl?: string; // <-- เพิ่ม props สำหรับรูปโปรไฟล์
 }
-export type { SidebarProps };
-export default function Sidebar() {
+
+export default function Sidebar({
+  userName = "Sasikan",
+  type = "admin",
+  userAvatarUrl = "https://i.pravatar.cc/150?img=68", // <-- ใส่ default avatar แบบเพื่อน
+}: SidebarComponentProps) {
   return (
-    <Stack
-      align="stretch"
-      justify="space-between"
-      gap="md"
-      style={{ height: "100%" }}
-    >
-      {/* Menu / เมนู*/}
+    <Stack align="stretch" justify="space-between" gap="md" style={{ height: "100%" }}>
+      {/* Menu */}
       <Box>
-        <NavLink
-          color="cyan"
-          label="Home"
-          component={RouterNavLink}
-          to="/"
-          active
-        />
-        <NavLink
-          color="cyan"
-          label="About"
-          component={RouterNavLink}
-          to="/about"
-        />
-        {/* ตัวอย่าง ใช้ Navlink กับ  components อื่นๆ ของ mantine */}
-        {/* <Text component={RouterNavLink} to="/">
-          Test
-        </Text> */}
+        <NavLink color="cyan" label="Home" component={RouterNavLink} to="/" active />
+        <NavLink color="cyan" label="About" component={RouterNavLink} to="/about" />
       </Box>
-      {/* แสดงผู้ใช้งาน */}
-      <Box p={10}>
-        <Text>chanadda</Text>
+
+      {/* User Info แบบเพื่อน */}
+      <Box
+        p={12}
+        style={{
+          border: "1px solid #e0e0e0",
+          borderRadius: 12,
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Text size="xs" fw={600} mb={4} color="green">
+          Online
+        </Text>
+        <Group spacing={10} align="center">
+          <Indicator color="green" position="bottom-end" offset={2}>
+            <Avatar size={36} radius="xl" src={userAvatarUrl} />
+          </Indicator>
+          <Stack spacing={0}>
+            <Text size="sm" fw={500}>
+              {userName}
+            </Text>
+            <Text size="xs" color="dimmed">
+              {type === "admin" ? "Admin" : "Student"}
+            </Text>
+          </Stack>
+        </Group>
       </Box>
     </Stack>
   );

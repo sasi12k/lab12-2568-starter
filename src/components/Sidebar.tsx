@@ -12,13 +12,13 @@ import {
 interface SidebarComponentProps {
   userName?: string;
   type?: "admin" | "student";
-  userAvatarUrl?: string; // <-- เพิ่ม props สำหรับรูปโปรไฟล์
+  userAvatarUrl?: string; // เพิ่ม props สำหรับรูปโปรไฟล์
 }
 
 export default function Sidebar({
   userName = "Sasikan",
   type = "admin",
-  userAvatarUrl = "https://i.pravatar.cc/150?img=68", // <-- ใส่ default avatar แบบเพื่อน
+  userAvatarUrl = "https://i.pravatar.cc/150?img=68", // รูปน่ารัก
 }: SidebarComponentProps) {
   return (
     <Stack align="stretch" justify="space-between" gap="md" style={{ height: "100%" }}>
@@ -40,11 +40,11 @@ export default function Sidebar({
         <Text size="xs" fw={600} mb={4} color="green">
           Online
         </Text>
-        <Group spacing={10} align="center">
+        <Group gap={10} align="center">
           <Indicator color="green" position="bottom-end" offset={2}>
             <Avatar size={36} radius="xl" src={userAvatarUrl} />
           </Indicator>
-          <Stack spacing={0}>
+          <Stack gap={0}>
             <Text size="sm" fw={500}>
               {userName}
             </Text>
